@@ -59,7 +59,7 @@ def read_data_from_db(cursor, table_name_1, col_names):
     print("Reading data from DB ...")
     cursor.execute("SELECT {col} from {tn}".format(col = col_names, tn = table_name_1))
     data = cursor.fetchall()
-    
+
     return data
 
 
@@ -69,6 +69,7 @@ def normalize_hu(image):
     image = (image - MIN_BOUND) / (MAX_BOUND - MIN_BOUND)
     image[image > 1] = 1.
     image[image < 0] = 0.
+
     return image
 
 
@@ -87,6 +88,8 @@ def read_data(path, labels_path, output_path, cursor = 0):
         # count += 1
         # if count == 3:
             # break
+        print("Processing patient no.: ", count + 1)
+        count = count + 1
         lstFilesDCM = []  # create an empty list
         masked_lung = []
         patient_name = folder.split('\\')[-1]
@@ -114,8 +117,8 @@ def read_data(path, labels_path, output_path, cursor = 0):
                     # org_img = cv_flip(org_img,org_img.shape[1],org_img.shape[0],cos_degree)
                 img, mask = get_segmented_lungs(org_img.copy())
                 org_img = normalize_hu(org_img)
-                print("Image Shape: ", org_img.shape)
-                print("Mask Shape: ", mask.shape)
+                # print("Image Shape: ", org_img.shape)
+                # print("Mask Shape: ", mask.shape)
                 cv2.imwrite(img_path, org_img * 255)
                 cv2.imwrite(img_path.replace("_i.png", "_m.png"), mask * 255)
             # pix_resampled, spacing = resample(images, scans, [1, 1, 1])
@@ -400,9 +403,9 @@ def prepare_image_for_net3D(img):
 
 
 if __name__ == '__main__':
-    path = r"F:\Data Science\DS Bowl\stage1_sample"
+    path = r"F:\Data Science\DS Bowl\stage1"
     labels_path = r"F:\Data Science\DS Bowl\stage1_labels.csv"
-    output_path = r"F:\Data Science\DS Bowl\Extracted_Images"
+    output_path = r"E:\Dhaval\Data Science\Projects\Deep Learning\Lung_Cancer\Output\Extracted_Images"
     table_name_1 = "lung_masks"
     col_names = ["Patient_id TEXT", "Masks array", "Label array"]
     data = []
