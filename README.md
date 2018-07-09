@@ -1,5 +1,7 @@
-# Lung-Cancer-Detection
 # Detecting Cancerous Lesions From the CT Scans Of Lungs Of Patients Using Convolution Neural Networks
+
+![Header_Image](Plots/lung_cancer_header.png)
+
 ### Data Science Bowl 2017
 
 ## The Problem
