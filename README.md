@@ -39,3 +39,4 @@ We then use these features as input to our XGBOOST model to predict if the CT sc
 
 ![Training Result for the XGBOOST model](Plots/validation.png)
 
+Please refer to the ipython notebook and python scripts for a detailed analysis and network implementation.
